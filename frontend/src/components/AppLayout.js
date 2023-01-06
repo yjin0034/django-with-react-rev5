@@ -17,7 +17,7 @@ function AppLayout({ children }) {
         </div>
         <div className="topnav">
           <Menu mode="horizontal">
-            <Menu.Item>메뉴1</Menu.Item>
+            <Menu.Item> items 메뉴1</Menu.Item>
             <Menu.Item>메뉴2</Menu.Item>
             <Menu.Item>메뉴3</Menu.Item>
           </Menu>
