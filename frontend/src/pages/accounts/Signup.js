@@ -85,7 +85,7 @@ export default function Signup() {
       </Form.Item>
     </Form>
   );
-}
+};
 
 const layout = {
   labelCol: { span: 8 },
