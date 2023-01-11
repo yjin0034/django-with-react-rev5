@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Axios from "axios";
-import useLocalStorage from "utils/useLocalStorage";
+import { useAppContext } from "store";
+import { setToken } from "store";
 
 export default function Login() {
+  const { store, dispatch } = useAppContext();
+  const location = useLocation();
   const history = useHistory();
-  const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
   const [fieldErrors, setFieldErrors] = useState({});
+
+  const { from: loginRedirectUrl } = location.state || {
+    from: { pathname: "/" }
+  };
 
   const onFinish = values => {
     async function fn() {
@@ -20,16 +26,15 @@ export default function Login() {
       try {
         const response = await Axios.post("http://localhost:8000/accounts/token/", data);  
         const { data: { token: jwtToken } } = response;
-        console.log("jwtToken", jwtToken);
-
-        setJwtToken(jwtToken);
+        
+        dispatch(setToken(jwtToken));
 
         notification.open({
           message: "로그인 성공",
           icon: <SmileOutlined style={{ color: "#108ee9" }} />
         });
 
-        // history.push("/accounts/login");  // TODO: 이동 주소
+        history.push(loginRedirectUrl);
       } catch(error) {
         if ( error.response) {
           notification.open({
