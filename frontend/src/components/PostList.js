@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "antd";
 import useAxios from 'axios-hooks';
 import Post from "./Post";
@@ -15,6 +15,10 @@ function PostList() {
     url: "http://localhost:8000/api/posts/",
     headers
   });  
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <div>
