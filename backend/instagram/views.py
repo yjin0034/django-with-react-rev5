@@ -30,3 +30,4 @@ class PostViewSet(ModelViewSet):
   def perform_create(self, serializer):
     serializer.save(author=self.request.user)
     return super().perform_create(serializer)
+  
