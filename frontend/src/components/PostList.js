@@ -21,6 +21,7 @@ function PostList() {
 
   useEffect(() => {
     setPostList(originPostList);
+    refetch();
   }, [originPostList]);
 
   const handleLike = async ({ post, isLike }) => {
@@ -37,7 +38,9 @@ function PostList() {
 
       setPostList(prevList => {
         return prevList.map(currentPost =>
-          currentPost === post ? {...currentPost, is_like: isLike} : currentPost
+          currentPost === post 
+            ? { ...currentPost, is_like: isLike } 
+            : currentPost
         );
       });
     } catch(error) {
