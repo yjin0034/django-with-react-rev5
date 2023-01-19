@@ -52,9 +52,15 @@ class PostViewSet(ModelViewSet):
     post.like_user_set.remove(self.request.user)
     return Response(status.HTTP_204_NO_CONTENT)
   
+  
 class CommentViewSet(ModelViewSet):
   queryset = Comment.objects.all()
   serializer_class = CommentSerializer
+  
+  def get_serializer_context(self):
+    context = super().get_serializer_context()
+    context["request"] = self.request
+    return context
   
   def get_queryset(self):
     qs = super().get_queryset()

@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Card, Comment } from "antd";
+import { Avatar, Card } from "antd";
 import { HeartOutlined, HeartTwoTone, UserOutlined } from "@ant-design/icons";
 import "./Post.scss";
 import CommentList from "./CommentList";
@@ -29,7 +29,7 @@ function Post({ post, handleLike }) {
           avatar={
             <Avatar 
               size="large" 
-              icon={<img src={`http://localhost:8000` + avatar_url} alt={username} />} 
+              icon={<img src={avatar_url} alt={username} />} 
             />
           } 
           title={location} 
