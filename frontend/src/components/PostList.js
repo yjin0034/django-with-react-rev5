@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Alert } from "antd";
 // import Axios from "axios";
 // import useAxios from 'axios-hooks';
-import { axiosInstance, useAxios } from "api";
+import { useAxios, axiosInstance } from "api";
 import Post from "./Post";
 import { useAppContext } from "store";
 
@@ -17,12 +17,14 @@ function PostList() {
 
   const [{ data: originPostList, loading, error }, refetch] = useAxios({
     url: "/api/posts/",
-    headers
-  });  
+    headers,
+  });
+
+  // FIXME: 새 포스팅을 저장 후, 포스팅 목록 컴포넌트 화면으로 이동을 했을 때, 방금 저장한 포스팅이 보이지 않는다. 
+  // refetch() 사용하니, uncaught (in promise) AxiosError 에러가 남. 이후 해결해보자.
 
   useEffect(() => {
     setPostList(originPostList);
-    refetch();
   }, [originPostList]);
 
   const handleLike = async ({ post, isLike }) => {
@@ -36,7 +38,6 @@ function PostList() {
         headers,
       });
       console.log("response :", response);
-
       setPostList(prevList => {
         return prevList.map(currentPost =>
           currentPost === post 

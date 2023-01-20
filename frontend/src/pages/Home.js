@@ -8,16 +8,17 @@ import SuggestionList from "components/SuggestionList";
 
 function Home() {
   const history = useHistory();
-  const handleClick = () => {
+  const handlePostSave = () => {
     history.push("/posts/new");
   }
+
   const sidebar = (
     <>
       <Button 
         type="primary" 
         block 
         style={{ marginBottom: "1rem" }}
-        onClick={handleClick}
+        onClick={handlePostSave}
       >
         새 포스팅 쓰기  
       </Button>
